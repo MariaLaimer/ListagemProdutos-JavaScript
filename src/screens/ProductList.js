@@ -47,28 +47,6 @@ export default function ProductList({ navigation }) {
     </View>;
   }
 
-  /*return (
-    <ScrollView style={styles.containerScroll}>
-      <View style={styles.grid}>
-        {items.map((produto) => (
-          <View key={produto.id} style={styles.card}>
-            <Image
-              style={styles.cardImage}
-              source={{ uri: produto.imageUrl }}
-              resizeMode="cover"
-            />
-            <View style={styles.cardBody}>
-              <Text style={styles.cardTitle} numberOfLines={2}>
-                {produto.title}
-              </Text>
-              <Text style={styles.cardPrice}>{produto.price}</Text>
-            </View>
-          </View>
-        ))}
-      </View>
-    </ScrollView>
-  );*/
-
   return (
     <View style={styles.containerScroll}>
       <FlatList

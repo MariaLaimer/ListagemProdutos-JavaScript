@@ -3,11 +3,11 @@ import api from "./api";
 export async function getProducts() {
   try {
     const response = await api.get("/products");
-    const products = response.data.products.map((product) => ({
+    const products = response.data.map((product) => ({
       id: product.id,
       title: product.title,
       price: product.price,
-      imageUrl: product.thumbnail,
+      imageUrl: product.image,
     }));
 
     return {

@@ -33,7 +33,7 @@ export default function ProductDetail({ navigation, route }) {
     } catch (error) {
       console.error(error);
     } finally {
-      setLoading(false); // garante que para mesmo se der erro
+      setLoading(false);
     }
   }
 
@@ -49,93 +49,39 @@ export default function ProductDetail({ navigation, route }) {
     <ScrollView style={styles.container}>
       <Image
         style={styles.image}
-        source={{ uri: item?.thumbnail }}
-        resizeMode="cover"
+        source={{ uri: item?.image }}
+        resizeMode="contain"
       />
 
       <View style={styles.body}>
-        <View style={styles.tagsRow}>
-          {item?.tags?.map((tag) => (
-            <View key={tag} style={styles.tag}>
-              <Text style={styles.tagText}>{tag}</Text>
-            </View>
-          ))}
-          <View style={[styles.tag, styles.tagDanger]}>
-            <Text style={[styles.tagText, styles.tagTextDanger]}>
-              {item?.availabilityStatus}
-            </Text>
-          </View>
+        {/* Categoria */}
+        <View style={styles.categoryBadge}>
+          <Text style={styles.categoryText}>{item?.category}</Text>
         </View>
 
         <Text style={styles.title}>{item?.title}</Text>
-        <Text style={styles.brand}>
-          {item?.brand} · SKU: {item?.sku}
-        </Text>
 
-        <View style={styles.priceRow}>
-          <Text style={styles.price}>${item?.price}</Text>
-          <View style={styles.discountBadge}>
-            <Text style={styles.discountText}>
-              -{item?.discountPercentage?.toFixed(0)}% off
-            </Text>
-          </View>
-        </View>
+        <Text style={styles.price}>${item?.price?.toFixed(2)}</Text>
 
         <Text style={styles.description}>{item?.description}</Text>
 
-        <View style={styles.statsRow}>
-          <View style={styles.statCard}>
-            <Text style={styles.statLabel}>Avaliação</Text>
-            <Text style={styles.statValue}>{item?.rating}</Text>
-          </View>
-          <View style={styles.statCard}>
-            <Text style={styles.statLabel}>Estoque</Text>
-            <Text style={styles.statValue}>{item?.stock} un.</Text>
-          </View>
-          <View style={styles.statCard}>
-            <Text style={styles.statLabel}>Mín. pedido</Text>
-            <Text style={styles.statValue}>
-              {item?.minimumOrderQuantity} un.
+        <View style={styles.divider} />
+
+        <View style={styles.ratingRow}>
+          <View style={styles.ratingCard}>
+            <Text style={styles.ratingLabel}>Avaliação</Text>
+            <Text style={styles.ratingValue}>{item?.rating?.rate} / 5</Text>
+            <Text style={styles.ratingStars}>
+              {"★".repeat(Math.round(item?.rating?.rate ?? 0))}
+              {"☆".repeat(5 - Math.round(item?.rating?.rate ?? 0))}
             </Text>
           </View>
-        </View>
-
-        <View style={styles.divider} />
-
-        <View style={styles.infoTable}>
-          {[
-            ["Garantia", item?.warrantyInformation],
-            ["Entrega", item?.shippingInformation],
-            ["Devolução", item?.returnPolicy],
-            ["Peso", `${item?.weight} kg`],
-          ].map(([label, value]) => (
-            <View key={label} style={styles.infoRow}>
-              <Text style={styles.infoLabel}>{label}</Text>
-              <Text style={styles.infoValue}>{value}</Text>
-            </View>
-          ))}
-        </View>
-
-        <View style={styles.divider} />
-
-        <Text style={styles.sectionTitle}>Avaliações</Text>
-        {item?.reviews?.map((review, index) => (
-          <View key={index} style={styles.reviewCard}>
-            <View style={styles.reviewHeader}>
-              <Text style={styles.reviewName}>{review.reviewerName}</Text>
-              <Text
-                style={[
-                  styles.reviewRating,
-                  review.rating >= 4 ? styles.ratingGood : styles.ratingBad,
-                ]}
-              >
-                {"★".repeat(review.rating)}
-                {"☆".repeat(5 - review.rating)} {review.rating}/5
-              </Text>
-            </View>
-            <Text style={styles.reviewComment}>{review.comment}</Text>
+          <View style={styles.ratingCard}>
+            <Text style={styles.ratingLabel}>Avaliações</Text>
+            <Text style={styles.ratingValue}>{item?.rating?.count}</Text>
+            <Text style={styles.ratingSubtext}>votos</Text>
           </View>
-        ))}
+        </View>
 
         <TouchableOpacity style={styles.button} activeOpacity={0.8}>
           <Text style={styles.buttonText}>Adicionar ao carrinho</Text>
@@ -149,38 +95,38 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#fff" },
   centered: { flex: 1, justifyContent: "center", alignItems: "center" },
 
-  image: { width: "100%", aspectRatio: 1, backgroundColor: "#f5f5f5" },
+  image: {
+    width: "100%",
+    aspectRatio: 1,
+    backgroundColor: "#f5f5f5",
+  },
 
   body: { padding: 16 },
 
-  tagsRow: { flexDirection: "row", flexWrap: "wrap", gap: 6, marginBottom: 10 },
-  tag: {
+  categoryBadge: {
+    alignSelf: "flex-start",
     paddingHorizontal: 10,
     paddingVertical: 3,
     borderRadius: 99,
     backgroundColor: "#EEEDFE",
+    marginBottom: 10,
   },
-  tagText: { fontSize: 11, color: "#3C3489" },
-  tagDanger: { backgroundColor: "#FCEBEB" },
-  tagTextDanger: { color: "#791F1F" },
+  categoryText: { fontSize: 11, color: "#3C3489", textTransform: "capitalize" },
 
-  title: { fontSize: 20, fontWeight: "600", color: "#1a1a1a", marginBottom: 2 },
-  brand: { fontSize: 13, color: "#888", marginBottom: 12 },
+  title: {
+    fontSize: 18,
+    fontWeight: "600",
+    color: "#1a1a1a",
+    marginBottom: 8,
+    lineHeight: 26,
+  },
 
-  priceRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 10,
+  price: {
+    fontSize: 26,
+    fontWeight: "700",
+    color: "#1a1a1a",
     marginBottom: 12,
   },
-  price: { fontSize: 26, fontWeight: "700", color: "#1a1a1a" },
-  discountBadge: {
-    paddingHorizontal: 10,
-    paddingVertical: 3,
-    borderRadius: 99,
-    backgroundColor: "#EAF3DE",
-  },
-  discountText: { fontSize: 12, color: "#27500A" },
 
   description: {
     fontSize: 14,
@@ -189,50 +135,26 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
 
-  statsRow: { flexDirection: "row", gap: 8, marginBottom: 16 },
-  statCard: {
-    flex: 1,
-    backgroundColor: "#f5f5f5",
-    borderRadius: 10,
-    padding: 10,
-    alignItems: "center",
-  },
-  statLabel: { fontSize: 11, color: "#888", marginBottom: 3 },
-  statValue: { fontSize: 15, fontWeight: "600", color: "#1a1a1a" },
-
   divider: { height: 0.5, backgroundColor: "#e0e0e0", marginVertical: 16 },
 
-  infoTable: { gap: 8 },
-  infoRow: { flexDirection: "row", justifyContent: "space-between" },
-  infoLabel: { fontSize: 13, color: "#888" },
-  infoValue: { fontSize: 13, color: "#1a1a1a" },
-
-  sectionTitle: {
-    fontSize: 14,
-    fontWeight: "600",
-    color: "#1a1a1a",
-    marginBottom: 10,
-  },
-
-  reviewCard: {
-    backgroundColor: "#f5f5f5",
-    borderRadius: 10,
-    padding: 12,
-    marginBottom: 8,
-  },
-  reviewHeader: {
+  ratingRow: {
     flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 4,
+    gap: 10,
+    marginBottom: 24,
   },
-  reviewName: { fontSize: 13, fontWeight: "600", color: "#1a1a1a" },
-  reviewRating: { fontSize: 12 },
-  ratingGood: { color: "#3B6D11" },
-  ratingBad: { color: "#A32D2D" },
-  reviewComment: { fontSize: 13, color: "#555" },
+  ratingCard: {
+    flex: 1,
+    backgroundColor: "#f5f5f5",
+    borderRadius: 12,
+    padding: 12,
+    alignItems: "center",
+  },
+  ratingLabel: { fontSize: 11, color: "#888", marginBottom: 4 },
+  ratingValue: { fontSize: 18, fontWeight: "700", color: "#1a1a1a" },
+  ratingStars: { fontSize: 13, color: "#f5a623", marginTop: 2 },
+  ratingSubtext: { fontSize: 11, color: "#888", marginTop: 2 },
 
   button: {
-    marginTop: 8,
     backgroundColor: "#1a1a1a",
     borderRadius: 12,
     paddingVertical: 14,
