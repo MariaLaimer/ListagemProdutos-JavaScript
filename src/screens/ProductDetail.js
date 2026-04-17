@@ -16,10 +16,11 @@ export default function ProductDetail({ navigation, route }) {
   const [item, setItem] = useState(null);
 
   useLayoutEffect(() => {
-    navigation.setOptions({
-      title: "Detalhes do Produto",
-    });
-  }, []);
+      navigation.setOptions({
+        title: item?.title || "Carregando Item...",
+        headerTitleAlign: "center",
+      });
+  }, [navigation, item]);
 
   useEffect(() => {
     getItem();
