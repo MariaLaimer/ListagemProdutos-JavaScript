@@ -9,6 +9,8 @@ import {
 } from "react-native";
 import React, { useState, useEffect, useLayoutEffect } from "react";
 import { getProductById } from "../services/productService";
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+
 
 export default function ProductDetail({ navigation, route }) {
   const { id } = route.params;
@@ -16,10 +18,15 @@ export default function ProductDetail({ navigation, route }) {
   const [item, setItem] = useState(null);
 
   useLayoutEffect(() => {
-      navigation.setOptions({
-        title: item?.title || "Carregando Item...",
-        headerTitleAlign: "center",
-      });
+    navigation.setOptions({
+      title: item?.title || "Carregando Item...",
+      headerTitleAlign: "center",
+      headerLeft: () => (
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <MaterialCommunityIcons name="arrow-left" size={28} color="#000000" />
+        </TouchableOpacity>
+      ),
+    });
   }, [navigation, item]);
 
   useEffect(() => {
