@@ -8,50 +8,98 @@ import {
   ScrollView,
   Image,
   FlatList,
-  TouchableOpacity,
+  TouchableOpacity
 } from "react-native";
-import { getProducts } from "../services/productService";
+import { getProducts, getProductByCategory } from "../services/productService";
+import ModalFilter from "../components/ModalFilter";
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 export default function ProductList({ navigation }) {
   const [loading, setLoading] = useState(false);
   const [items, setItems] = useState([]);
+  const [filter, setFilter] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
 
   useLayoutEffect(() => {
     navigation.setOptions({
       title: "Lista de Produtos",
       headerTitleAlign: "center",
-      headerLeft: () => {
-        return <Button title="Logout" />;
-      },
-      headerRight: () => {
-        return <Button title="Grupo" />;
-      },
+      headerLeft: () => { return <Button title="Logout" />; },
+      headerRight: () => { return <Button title="Grupo" />; },
     });
   }, []);
 
   useEffect(() => {
-    setLoading(true);
-    getItems();
-    setLoading(false);
+    getAllItems();
   }, []);
 
-  async function getItems() {
+  async function getAllItems() {
+    setLoading(true);
     const response = await getProducts();
     setItems(response.data);
-    console.log(response);
+    setLoading(false);
+  }
+
+  async function getByFilter(category) {
+    setLoading(true);
+    const response = await getProductByCategory(category);
+    setItems(response.data);
+    setLoading(false);
   }
 
   if (loading) {
-    <View style={styles.container}>
-      <ActivityIndicator size={"large"} />
-    </View>;
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size={"large"} />
+      </View>
+    );
+  }
+
+  const handleFilter = (category) => {
+    if (!category) return;
+    setFilter(category);
+    getByFilter(category);
+  }
+
+  const handleRemoveFilter = () => {
+    setFilter(null);
+    getAllItems();
   }
 
   return (
     <View style={styles.containerScroll}>
+
+      {/* ÍCONE FILTRAR: */}
+      <View style={styles.filter}>
+        <TouchableOpacity
+          onPress={() => {
+            if (filter) {
+              handleRemoveFilter();
+            } else {
+              setModalVisible(true);
+            }
+          }}
+        >
+          {!filter ? (
+            <MaterialCommunityIcons name="filter-variant" size={34} color="black" />
+          ) : (
+            <MaterialCommunityIcons name="filter-variant-remove" size={34} color="black" />)}
+        </TouchableOpacity>
+      </View>
+
+      {/* POP-UP FILTRAGEM: */}
+      <ModalFilter
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        onFilter={handleFilter}
+      />
+
+      {/* LISTAGEM DE ITENS: */}
       <FlatList
         data={items}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => String(item.id)}
+        numColumns={2}
+        columnWrapperStyle={{ justifyContent: 'space-between', paddingHorizontal: 10 }}
         renderItem={({ item }) => (
           <TouchableOpacity
             key={item.id}
@@ -71,7 +119,9 @@ export default function ProductList({ navigation }) {
               <Text style={styles.cardTitle} numberOfLines={2}>
                 {item.title}
               </Text>
-              <Text style={styles.cardPrice}>{item.price}</Text>
+              <Text style={styles.cardPrice}>
+                {item.price}
+              </Text>
             </View>
           </TouchableOpacity>
         )}
@@ -81,6 +131,9 @@ export default function ProductList({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  filter: {
+    alignItems: "flex-end",
+  },
   container: {
     flex: 1,
     backgroundColor: "#fff",

@@ -49,12 +49,11 @@ export default function ProductDetail({ navigation, route }) {
     <ScrollView style={styles.container}>
       <Image
         style={styles.image}
-        source={{ uri: item?.image }}
+        source={{ uri: item?.image || item?.imageUrl }}
         resizeMode="contain"
       />
 
       <View style={styles.body}>
-        {/* Categoria */}
         <View style={styles.categoryBadge}>
           <Text style={styles.categoryText}>{item?.category}</Text>
         </View>
