@@ -1,9 +1,11 @@
-import { View, Text, Alert } from 'react-native'
+
 import { useState } from 'react'
-import { TextInput, TouchableOpacity, ActivityIndicator, StyleSheet } from 'react-native'
+import { TextInput, TouchableOpacity, ActivityIndicator, StyleSheet, View, Text, Alert } from 'react-native'
 
 
 export default function Login({ navigation }) {
+  
+  
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -11,7 +13,7 @@ export default function Login({ navigation }) {
 
   const handleLogin = async () => {
     if (!username || !password) {
-      Alert.alert("Erro', 'Por favor, preencha o usuário e a senha.")
+      Alert.alert("Erro", "Por favor, preencha o usuário e a senha.")
       return;
     }
     setIsLoading(true)
@@ -27,7 +29,6 @@ export default function Login({ navigation }) {
            password: password, 
           }),
       });
-
       if(!response.ok) {
         throw new Error("Usuario ou senha inválidos.")
     }
@@ -35,8 +36,7 @@ export default function Login({ navigation }) {
       const data = await response.json()
 
       if (data.token) {
-        Alert.alert('Login bem-sucedido!')
-        navigation.navigate('ProductList')
+          navigation.navigate('ProductList')
       }
     } catch (error) {
       Alert.alert("Falha no Login", error.message || 'Ocorreu um erro ao conectar.')
