@@ -21,13 +21,20 @@ export default function ProductList({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
 
   useLayoutEffect(() => {
-    navigation.setOptions({
-      title: "Lista de Produtos",
-      headerTitleAlign: "center",
-      headerLeft: () => { return <Button title="Logout" />; },
-      headerRight: () => { return <Button title="Grupo" />; },
-    });
-  }, []);
+  navigation.setOptions({
+    title: "Lista de Produtos",
+    headerTitleAlign: "center",
+    headerLeft: () => { return <Button title="Logout" />; },
+    headerRight: () => (
+      <TouchableOpacity
+        onPress={() => navigation.navigate("GroupInfo")}
+        style={{ marginRight: 12 }}
+      >
+        <Text style={{ color: "#007AFF", fontSize: 16 }}>Informações</Text>
+      </TouchableOpacity>
+    ),
+  });
+}, []);
 
   useEffect(() => {
     getAllItems();
