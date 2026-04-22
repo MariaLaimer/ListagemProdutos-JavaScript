@@ -20,7 +20,6 @@ export default function ProductList({ navigation }) {
   const [filter, setFilter] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
 
-<<<<<<< HEAD
 useLayoutEffect(() => {
   navigation.setOptions({
     title: "Lista de Produtos",
@@ -33,13 +32,6 @@ useLayoutEffect(() => {
         />
       );
     },
-=======
-  useLayoutEffect(() => {
-  navigation.setOptions({
-    title: "Lista de Produtos",
-    headerTitleAlign: "center",
-    headerLeft: () => { return <Button title="Logout" />; },
->>>>>>> 1612f49e0bba552990e5dc9f5a547731cef3b33f
     headerRight: () => (
       <TouchableOpacity
         onPress={() => navigation.navigate("GroupInfo")}
