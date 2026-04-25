@@ -83,11 +83,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   categoryButtonSelected: {
-    backgroundColor: "#2196F3",
-    borderColor: "#2196F3",
+    backgroundColor: "#D4DCBF",
+    borderColor: "#5C6844",
   },
   buttonClose: {
-    backgroundColor: '#2196F3',
+    backgroundColor: '#5C6844',
   },
   textStyle: {
     color: 'white',
