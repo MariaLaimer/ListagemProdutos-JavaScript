@@ -1,5 +1,6 @@
-import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import React, { useLayoutEffect } from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 const OLIVE = '#7C8C5E';
 const OLIVE_DARK = '#5C6844';
@@ -14,7 +15,23 @@ const membros = [
   { nome: 'Kauê Anacleto Saggiorato', ra: '1137645', genero: 'M' },
 ];
 
-export default function GroupInfo() {
+export default function GroupInfo({ navigation }) {
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: 'Informações',
+      headerTitleAlign: 'center',
+      headerTitleStyle: { fontSize: 17, fontWeight: '700', color: '#5C6844' },
+      headerStyle: { backgroundColor: '#F7F5EF', shadowColor: 'transparent', elevation: 0 },
+      headerLeft: () => (
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={headerStyles.backBtn}
+        >
+          <MaterialCommunityIcons name="arrow-left" size={20} color="#FFF" />
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation]);
   return (
     <View style={styles.safe}>
       {/* Apenas blobs do topo, sem os de baixo que causavam o círculo vermelho */}
@@ -72,6 +89,23 @@ export default function GroupInfo() {
     </View>
   );
 }
+
+const headerStyles = StyleSheet.create({
+  backBtn: {
+    marginLeft: 12,
+    width: 38,
+    height: 38,
+    borderRadius: 12,
+    backgroundColor: '#7C8C5E',
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#5C6844',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 6,
+    elevation: 3,
+  },
+});
 
 const styles = StyleSheet.create({
   safe: {
