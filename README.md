@@ -1,7 +1,9 @@
 # 📦 Projeto Mobile — React Native + Expo
  
 Aplicativo de listagem e consulta de produtos consumindo a [Fake Store API](https://fakestoreapi.com).
- 
+
+<img width="1389" height="925" alt="Image" src="https://github.com/user-attachments/assets/a31ec5e9-20e7-40ec-8d13-217d9ee7a9bf" />
+
 ---
  
 ## Pré-requisitos:
