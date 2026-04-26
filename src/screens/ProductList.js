@@ -248,8 +248,6 @@ const styles = StyleSheet.create({
     backgroundColor: CREAM,
     position: 'relative',
   },
-
-  // Círculos decorativos de fundo
   decCircle1: {
     position: 'absolute',
     width: 180,
@@ -291,7 +289,6 @@ const styles = StyleSheet.create({
     right: -40,
   },
 
-  // Filtro
   filterRow: {
     alignItems: "flex-end",
     paddingHorizontal: 16,
@@ -311,7 +308,6 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
 
-  // Lista
   listContent: {
     paddingHorizontal: 12,
     paddingBottom: 24,
@@ -320,8 +316,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 14,
   },
-
-  // Card
   card: {
     width: '48%',
     backgroundColor: '#F7F5EF',

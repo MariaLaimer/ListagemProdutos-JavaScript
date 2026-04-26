@@ -32,10 +32,14 @@ export default function ProductDetail({ navigation, route }) {
   const [item, setItem] = useState(null);
   const [activeTab, setActiveTab] = useState('Detalhes');
 
+  const [fav, setFav] = useState(false);
+
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: "",
-      headerStyle: { backgroundColor: '#F7F5EF', shadowColor: 'transparent', elevation: 0 },
+      title: 'OLIVRA',
+      headerTitleAlign: 'center',
+      headerTitleStyle: { fontSize: 17, fontWeight: '800', color: OLIVE_DARK, letterSpacing: 4 },
+      headerStyle: { backgroundColor: '#FFFFFF', shadowColor: 'transparent', elevation: 0 },
       headerLeft: () => (
         <TouchableOpacity
           onPress={() => navigation.goBack()}
@@ -44,8 +48,20 @@ export default function ProductDetail({ navigation, route }) {
           <MaterialCommunityIcons name="arrow-left" size={20} color="#FFF" />
         </TouchableOpacity>
       ),
+      headerRight: () => (
+        <TouchableOpacity
+          style={headerStyles.favBtn}
+          onPress={() => setFav(prev => !prev)}
+        >
+          <MaterialCommunityIcons
+            name={fav ? "heart" : "heart-outline"}
+            size={20}
+            color={fav ? "#E05C5C" : "#AAA"}
+          />
+        </TouchableOpacity>
+      ),
     });
-  }, [navigation, item]);
+  }, [navigation, fav]);
 
   useEffect(() => {
     getItem();
@@ -178,7 +194,22 @@ const headerStyles = StyleSheet.create({
     shadowRadius: 6,
     elevation: 3,
   },
-});
+  favBtn: {
+    marginRight: 12,
+    width: 38,
+    height: 38,
+    borderRadius: 12,
+    backgroundColor: '#FFF',
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 6,
+    elevation: 3,
+  },
+  },
+);
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -192,7 +223,6 @@ const styles = StyleSheet.create({
     backgroundColor: CREAM,
   },
 
-  // Seção da imagem
   imageSection: {
     height: 280,
     backgroundColor: '#EDE9E0',
@@ -203,8 +233,6 @@ const styles = StyleSheet.create({
     width: '75%',
     height: '85%',
   },
-
-  // Card branco sobrepondo
   contentCard: {
     flex: 1,
     backgroundColor: '#FFF',
@@ -221,8 +249,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingTop: 28,
   },
-
-  // Topo: badge + preço
   topRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -246,8 +272,6 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     color: OLIVE_DARK,
   },
-
-  // Título
   title: {
     fontSize: 17,
     fontWeight: '700',
@@ -255,8 +279,6 @@ const styles = StyleSheet.create({
     lineHeight: 25,
     marginBottom: 10,
   },
-
-  // Estrelas
   ratingRow: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -280,7 +302,6 @@ const styles = StyleSheet.create({
     color: '#9A9A8A',
   },
 
-  // Tabs
   tabs: {
     flexDirection: 'row',
     borderBottomWidth: 1.5,
@@ -305,14 +326,12 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
-  // Descrição
   description: {
     fontSize: 13.5,
     color: '#6B6B5E',
     lineHeight: 22,
   },
 
-  // Avaliação tab
   reviewSection: {
     flexDirection: 'row',
     gap: 12,
@@ -339,8 +358,6 @@ const styles = StyleSheet.create({
     color: '#B5B5A8',
     textAlign: 'center',
   },
-
-  // Botão
   btnWrap: {
     position: 'absolute',
     bottom: 0,

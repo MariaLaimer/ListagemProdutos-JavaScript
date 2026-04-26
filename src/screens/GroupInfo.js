@@ -40,7 +40,7 @@ export default function GroupInfo({ navigation }) {
 
       <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}>
 
-        {/* Header: logo à esquerda, "SOBRE / o app" à direita */}
+        {/* Header: "SOBRE / o app" à direita */}
         <View style={styles.header}>
           <View style={styles.logoCircle}>
             <Text style={styles.logoSymbol}>✦</Text>
@@ -113,7 +113,6 @@ const styles = StyleSheet.create({
     backgroundColor: CREAM,
   },
 
-  // Blobs apenas no topo
   blobTop: {
     position: 'absolute',
     top: -70,
@@ -141,7 +140,6 @@ const styles = StyleSheet.create({
     paddingBottom: 48,
   },
 
-  // Header: logo à esquerda + texto à direita
   header: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -183,7 +181,6 @@ const styles = StyleSheet.create({
     marginTop: -2,
   },
 
-  // Card principal
   card: {
     backgroundColor: '#FFFFFF',
     borderRadius: 28,
@@ -214,7 +211,6 @@ const styles = StyleSheet.create({
     letterSpacing: 0.3,
   },
 
-  // Cards de membros
   membroCard: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -247,8 +243,6 @@ const styles = StyleSheet.create({
     color: '#9A9A8A',
     marginTop: 2,
   },
-
-  // Rodapé
   rodape: {
     marginTop: 24,
     alignItems: 'center',

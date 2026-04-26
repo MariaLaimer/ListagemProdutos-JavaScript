@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 import { TextInput, TouchableOpacity, ActivityIndicator, StyleSheet, View, Text, Alert, SafeAreaView } from 'react-native'
 import Feather from '@expo/vector-icons/Feather';
@@ -62,9 +61,9 @@ export default function Login({ navigation }) {
           <View style={styles.logoCircle}>
             <Text style={styles.logoSymbol}>✦</Text>
           </View>
-          <Text style={styles.brand}>E-COMMERCE</Text>
-          <Text style={styles.brandSub}>✦</Text>
-          <Text style={styles.tagline}>Produtos Variados para todo gosto</Text>
+          <Text style={styles.brand}>OLIVRA</Text>
+          <Text style={styles.brandSub}>STORE</Text>
+          <Text style={styles.tagline}>Brilhe em cada escolha! ✦</Text>
         </View>
 
         {/* Card */}
@@ -181,7 +180,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
   },
 
-  // Header / Brand
   header: {
     alignItems: 'center',
     marginBottom: 32,
@@ -223,8 +221,6 @@ const styles = StyleSheet.create({
     color: '#9A9A8A',
     fontStyle: 'italic',
   },
-
-  // Card
   card: {
     backgroundColor: '#FFFFFF',
     borderRadius: 28,
@@ -247,7 +243,6 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
 
-  // Inputs
   inputWrap: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -278,7 +273,6 @@ const styles = StyleSheet.create({
     opacity: 0.5,
   },
 
-  // Button
   button: {
     height: 54,
     backgroundColor: OLIVE,
