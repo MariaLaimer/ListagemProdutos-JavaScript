@@ -62,9 +62,9 @@ export default function Login({ navigation }) {
           <View style={styles.logoCircle}>
             <Text style={styles.logoSymbol}>✦</Text>
           </View>
-          <Text style={styles.brand}>NOME</Text>
-          <Text style={styles.brandSub}>TEST</Text>
-          <Text style={styles.tagline}>frase impactante pra por dps</Text>
+          <Text style={styles.brand}>E-COMMERCE</Text>
+          <Text style={styles.brandSub}>✦</Text>
+          <Text style={styles.tagline}>Produtos Variados para todo gosto</Text>
         </View>
 
         {/* Card */}
