@@ -1,12 +1,12 @@
-# 📦 Projeto Mobile — React Native + Expo
+# 🧩 Aplicação Mobile — React Native + Expo
  
-Aplicativo de listagem e consulta de produtos consumindo a [Fake Store API](https://fakestoreapi.com).
+Aplicativo **'Olivra Store ₊✧'** de Listagem e Consulta de Produtos consumindo a [Fake Store API](https://fakestoreapi.com).
 
-<img width="1389" height="925" alt="Image" src="https://github.com/user-attachments/assets/a31ec5e9-20e7-40ec-8d13-217d9ee7a9bf" />
+<img width="2778" height="1850" alt="Image" src="https://github.com/user-attachments/assets/bc91d913-0786-4075-9826-6ed62732717c" />
 
 ---
  
-## Pré-requisitos:
+## ₊✧ Tecnologias Utilizadas:
  
  Certifique-se de ter instalado em sua máquina:
  
@@ -16,7 +16,7 @@ Aplicativo de listagem e consulta de produtos consumindo a [Fake Store API](http
 - Aplicativo **Expo Go** no seu celular ([Android](https://play.google.com/store/apps/details?id=host.exp.exponent) / [iOS](https://apps.apple.com/app/expo-go/id982107779)) **ou** um emulador configurado, para testes melhores
 ---
  
-## Passos para rodar o projeto:
+## ₊✧ Passos para Rodar o Projeto:
  
 ### 1. Clone o Repositório:
  
@@ -52,7 +52,7 @@ Após iniciar, um QR Code será exibido no terminal e no navegador. Escolha uma 
 - **Via Browser:** Instale dependência com ```npx expo install react-dom react-native-web``` e depois pressione `w` no terminal
 ---
  
-## 🔐 Usuários disponíveis para Login:
+## ₊✧ Usuários disponíveis para Login:
  
 O aplicativo utiliza a autenticação da [Fake Store API](https://fakestoreapi.com).
 
@@ -70,7 +70,7 @@ Você pode verificar todos os usuários cadastrados acessando diretamente pelo n
  
 ---
  
-## 👥 Desenvolvedores:
+## 🌿 Desenvolvedores:
  
 | Nome | RA |
 |---|---|
